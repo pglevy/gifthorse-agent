@@ -3,7 +3,7 @@
 {% block content %}
 <h2>User Profile</h2>
 <div class="profile-container">
-    <img src="{{ url_for('static', filename='profile_pics/' + current_user.profile_picture) }}" alt="Profile Picture" class="profile-picture">
+    <img src="{{ url_for('static', filename='profile_pics/' + (current_user.profile_picture if current_user.profile_picture else 'default.jpg')) }}" alt="Profile Picture" class="profile-picture">
     {% if form %}
         <form method="POST" action="{{ url_for('profile.update_profile') }}" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
