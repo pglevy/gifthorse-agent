@@ -12,6 +12,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(256), nullable=False)
     reset_token = db.Column(db.String(100), nullable=True)
     reset_token_expiration = db.Column(db.DateTime, nullable=True)
+    profile_picture = db.Column(db.String(255), nullable=True, default='default.jpg')
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
