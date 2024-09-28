@@ -80,7 +80,6 @@ def reset_token(token):
 
 def send_reset_email(user, token):
     msg = Message('Password Reset Request',
-                  sender='noreply@demo.com',
                   recipients=[user.email])
     msg.body = f'''To reset your password, visit the following link:
 {url_for('auth.reset_token', token=token, _external=True)}
