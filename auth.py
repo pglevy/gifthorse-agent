@@ -3,11 +3,10 @@ from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash
 from models import User
 from forms import LoginForm, RegistrationForm, RequestResetForm, ResetPasswordForm
-from app import db, login_manager
-from flask_mail import Mail, Message
+from app import db, login_manager, mail
+from flask_mail import Message
 
 auth = Blueprint('auth', __name__)
-mail = Mail()
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -50,7 +49,7 @@ def logout():
 @auth.route('/reset_password', methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('index'))
     form = RequestResetForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
@@ -66,7 +65,7 @@ def reset_request():
 @auth.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        return redirect(url_for('index'))
     user = User.verify_reset_token(token)
     if user is None:
         flash('That is an invalid or expired token', 'warning')
