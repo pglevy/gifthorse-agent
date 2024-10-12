@@ -87,3 +87,15 @@ def mark_bought(item_id):
         db.session.commit()
         flash('Item marked as bought!', 'success')
     return redirect(url_for('wishlist.shopping_list'))
+
+@wishlist.route('/shopping_list/mark_available/<int:item_id>', methods=['POST'])
+@login_required
+def mark_available(item_id):
+    item = Wishlist.query.get_or_404(item_id)
+    if item.user_id == current_user.id:
+        flash('You cannot mark your own item as available.', 'danger')
+    else:
+        item.bought = False
+        db.session.commit()
+        flash('Item marked as available!', 'success')
+    return redirect(url_for('wishlist.shopping_list'))
