@@ -41,5 +41,5 @@ class Wishlist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     item_name = db.Column(db.String(100), nullable=False)
-    item_url = db.Column(db.String(255), nullable=True)
+    item_url = db.Column(db.String(1000), nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
