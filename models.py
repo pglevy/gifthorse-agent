@@ -46,3 +46,4 @@ class Wishlist(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     public = db.Column(db.Boolean, default=False, nullable=False)
     notes = db.Column(db.Text, nullable=True)
+    bought = db.Column(db.Boolean, default=False, nullable=False)

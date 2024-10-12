@@ -75,3 +75,15 @@ def edit_wishlist_item(item_id):
 def shopping_list():
     public_items = Wishlist.query.filter_by(public=True).filter(Wishlist.user_id != current_user.id).all()
     return render_template('shopping_list.html', items=public_items)
+
+@wishlist.route('/shopping_list/mark_bought/<int:item_id>', methods=['POST'])
+@login_required
+def mark_bought(item_id):
+    item = Wishlist.query.get_or_404(item_id)
+    if item.user_id == current_user.id:
+        flash('You cannot mark your own item as bought.', 'danger')
+    else:
+        item.bought = True
+        db.session.commit()
+        flash('Item marked as bought!', 'success')
+    return redirect(url_for('wishlist.shopping_list'))
