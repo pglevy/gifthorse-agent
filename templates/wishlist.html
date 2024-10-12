@@ -8,6 +8,7 @@
             <tr>
                 <th>Item Name</th>
                 <th>Price Range</th>
+                <th>Notes</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -16,6 +17,7 @@
             <tr>
                 <td><a href="{{ item.item_url }}" target="_blank">{{ item.item_name }}</a></td>
                 <td>{{ item.price_range.capitalize() }}</td>
+                <td>{{ item.notes }}</td>
                 <td>
                     <a href="{{ url_for('wishlist.edit_wishlist_item', item_id=item.id) }}">Edit</a>
                     <form action="{{ url_for('wishlist.remove_wishlist_item', item_id=item.id) }}" method="POST" style="display: inline;">

@@ -22,6 +22,7 @@ def add_wishlist_item():
             item_url=form.item_url.data,
             price_range=form.price_range.data,
             public=form.public.data,
+            notes=form.notes.data,
             user_id=current_user.id
         )
         db.session.add(new_item)
@@ -56,6 +57,7 @@ def edit_wishlist_item(item_id):
         item.item_url = form.item_url.data
         item.price_range = form.price_range.data
         item.public = form.public.data
+        item.notes = form.notes.data
         db.session.commit()
         flash('Item updated successfully!', 'success')
         return redirect(url_for('wishlist.view_wishlist'))
@@ -64,6 +66,7 @@ def edit_wishlist_item(item_id):
         form.item_url.data = item.item_url
         form.price_range.data = item.price_range
         form.public.data = item.public
+        form.notes.data = item.notes
     
     return render_template('edit_wishlist_item.html', form=form, item=item)
 

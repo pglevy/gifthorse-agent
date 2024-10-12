@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, FileField, SelectField, BooleanField
-from wtforms.validators import DataRequired, Email, EqualTo, Length, URL
+from wtforms import StringField, PasswordField, SubmitField, FileField, SelectField, BooleanField, TextAreaField
+from wtforms.validators import DataRequired, Email, EqualTo, Length, URL, Optional
 from flask_wtf.file import FileAllowed
 
 class LoginForm(FlaskForm):
@@ -35,6 +35,7 @@ class WishlistItemForm(FlaskForm):
     item_url = StringField('Item URL', validators=[URL(), DataRequired()])
     price_range = SelectField('Price Range', choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')], validators=[DataRequired()])
     public = BooleanField('Make this item public')
+    notes = TextAreaField('Notes', validators=[Optional(), Length(max=500)])
     submit = SubmitField('Add to Wishlist')
 
 class EditWishlistItemForm(FlaskForm):
@@ -42,4 +43,5 @@ class EditWishlistItemForm(FlaskForm):
     item_url = StringField('Item URL', validators=[URL(), DataRequired()])
     price_range = SelectField('Price Range', choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')], validators=[DataRequired()])
     public = BooleanField('Make this item public')
+    notes = TextAreaField('Notes', validators=[Optional(), Length(max=500)])
     submit = SubmitField('Update Item')
