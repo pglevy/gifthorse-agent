@@ -39,6 +39,9 @@ def create_app():
     from profile import profile as profile_blueprint
     app.register_blueprint(profile_blueprint)
 
+    from wishlist import wishlist as wishlist_blueprint
+    app.register_blueprint(wishlist_blueprint)
+
     @app.route('/')
     def index():
         return render_template('base.html')

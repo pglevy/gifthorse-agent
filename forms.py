@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, FileField
-from wtforms.validators import DataRequired, Email, EqualTo, Length
+from wtforms.validators import DataRequired, Email, EqualTo, Length, URL
 from flask_wtf.file import FileAllowed
 
 class LoginForm(FlaskForm):
@@ -29,3 +29,8 @@ class ResetPasswordForm(FlaskForm):
     password = PasswordField('New Password', validators=[DataRequired(), Length(min=6)])
     confirm_password = PasswordField('Confirm New Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset Password')
+
+class WishlistItemForm(FlaskForm):
+    item_name = StringField('Item Name', validators=[DataRequired()])
+    item_url = StringField('Item URL', validators=[URL(), DataRequired()])
+    submit = SubmitField('Add to Wishlist')

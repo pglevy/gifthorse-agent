@@ -13,6 +13,7 @@ class User(UserMixin, db.Model):
     reset_token = db.Column(db.String(100), nullable=True)
     reset_token_expiration = db.Column(db.DateTime, nullable=True)
     profile_picture = db.Column(db.String(255), nullable=True, default='default.jpg')
+    wishlist_items = db.relationship('Wishlist', backref='user', lazy='dynamic')
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -35,3 +36,10 @@ class User(UserMixin, db.Model):
         except:
             return None
         return User.query.get(user_id)
+
+class Wishlist(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    item_name = db.Column(db.String(100), nullable=False)
+    item_url = db.Column(db.String(255), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
