@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, FileField
+from wtforms import StringField, PasswordField, SubmitField, FileField, SelectField
 from wtforms.validators import DataRequired, Email, EqualTo, Length, URL
 from flask_wtf.file import FileAllowed
 
@@ -33,9 +33,11 @@ class ResetPasswordForm(FlaskForm):
 class WishlistItemForm(FlaskForm):
     item_name = StringField('Item Name', validators=[DataRequired()])
     item_url = StringField('Item URL', validators=[URL(), DataRequired()])
+    price_range = SelectField('Price Range', choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')], validators=[DataRequired()])
     submit = SubmitField('Add to Wishlist')
 
 class EditWishlistItemForm(FlaskForm):
     item_name = StringField('Item Name', validators=[DataRequired()])
     item_url = StringField('Item URL', validators=[URL(), DataRequired()])
+    price_range = SelectField('Price Range', choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')], validators=[DataRequired()])
     submit = SubmitField('Update Item')

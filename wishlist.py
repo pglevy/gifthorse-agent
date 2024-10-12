@@ -17,7 +17,7 @@ def view_wishlist():
 def add_wishlist_item():
     form = WishlistItemForm()
     if form.validate_on_submit():
-        new_item = Wishlist(item_name=form.item_name.data, item_url=form.item_url.data, user_id=current_user.id)
+        new_item = Wishlist(item_name=form.item_name.data, item_url=form.item_url.data, price_range=form.price_range.data, user_id=current_user.id)
         db.session.add(new_item)
         db.session.commit()
         flash('Item added to your wishlist!', 'success')
@@ -48,11 +48,13 @@ def edit_wishlist_item(item_id):
     if form.validate_on_submit():
         item.item_name = form.item_name.data
         item.item_url = form.item_url.data
+        item.price_range = form.price_range.data
         db.session.commit()
         flash('Item updated successfully!', 'success')
         return redirect(url_for('wishlist.view_wishlist'))
     elif request.method == 'GET':
         form.item_name.data = item.item_name
         form.item_url.data = item.item_url
+        form.price_range.data = item.price_range
     
     return render_template('edit_wishlist_item.html', form=form, item=item)
