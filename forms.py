@@ -34,3 +34,8 @@ class WishlistItemForm(FlaskForm):
     item_name = StringField('Item Name', validators=[DataRequired()])
     item_url = StringField('Item URL', validators=[URL(), DataRequired()])
     submit = SubmitField('Add to Wishlist')
+
+class EditWishlistItemForm(FlaskForm):
+    item_name = StringField('Item Name', validators=[DataRequired()])
+    item_url = StringField('Item URL', validators=[URL(), DataRequired()])
+    submit = SubmitField('Update Item')

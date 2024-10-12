@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Edit Wishlist Item</h2>
+<form method="POST" action="{{ url_for('wishlist.edit_wishlist_item', item_id=item.id) }}">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.item_name.label }}
+        {{ form.item_name() }}
+    </div>
+    <div>
+        {{ form.item_url.label }}
+        {{ form.item_url() }}
+    </div>
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
+<a href="{{ url_for('wishlist.view_wishlist') }}">Back to Wishlist</a>
+{% endblock %}

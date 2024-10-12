@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from models import Wishlist
-from forms import WishlistItemForm
+from forms import WishlistItemForm, EditWishlistItemForm
 from app import db
 
 wishlist = Blueprint('wishlist', __name__)
@@ -35,3 +35,24 @@ def remove_wishlist_item(item_id):
     db.session.commit()
     flash('Item removed from your wishlist.', 'success')
     return redirect(url_for('wishlist.view_wishlist'))
+
+@wishlist.route('/wishlist/edit/<int:item_id>', methods=['GET', 'POST'])
+@login_required
+def edit_wishlist_item(item_id):
+    item = Wishlist.query.get_or_404(item_id)
+    if item.user_id != current_user.id:
+        flash('You do not have permission to edit this item.', 'danger')
+        return redirect(url_for('wishlist.view_wishlist'))
+    
+    form = EditWishlistItemForm()
+    if form.validate_on_submit():
+        item.item_name = form.item_name.data
+        item.item_url = form.item_url.data
+        db.session.commit()
+        flash('Item updated successfully!', 'success')
+        return redirect(url_for('wishlist.view_wishlist'))
+    elif request.method == 'GET':
+        form.item_name.data = item.item_name
+        form.item_url.data = item.item_url
+    
+    return render_template('edit_wishlist_item.html', form=form, item=item)
