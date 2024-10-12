@@ -44,3 +44,4 @@ class Wishlist(db.Model):
     item_url = db.Column(db.String(1000), nullable=True)
     price_range = db.Column(db.String(10), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    public = db.Column(db.Boolean, default=False, nullable=False)

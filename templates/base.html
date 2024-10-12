@@ -13,6 +13,7 @@
                 <li><a href="{{ url_for('profile.view_profile') }}">Profile</a></li>
                 <li><a href="{{ url_for('auth.list_users') }}">User List</a></li>
                 <li><a href="{{ url_for('wishlist.view_wishlist') }}">Wishlist</a></li>
+                <li><a href="{{ url_for('wishlist.shopping_list') }}">Shopping List</a></li>
                 <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
             {% else %}
                 <li><a href="{{ url_for('auth.login') }}">Login</a></li>
