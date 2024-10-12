@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>User List</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Profile Picture</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                <img src="{{ url_for('static', filename='profile_pics/' + (user.profile_picture if user.profile_picture else 'default.jpg')) }}" 
+                     alt="{{ user.name }}'s profile picture" 
+                     style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

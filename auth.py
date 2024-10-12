@@ -87,3 +87,9 @@ def send_reset_email(user, token):
 If you did not make this request then simply ignore this email and no changes will be made.
 '''
     mail.send(msg)
+
+@auth.route('/users')
+@login_required
+def list_users():
+    users = User.query.all()
+    return render_template('users_list.html', users=users)
