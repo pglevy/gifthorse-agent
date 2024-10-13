@@ -1,27 +1,16 @@
 body {
-  background-color: var(--pico-color-amber-50);
+  background-color: var(--pico-background-color);
   min-height: 100vh;
 }
 
-.section-nav {
-  background-color: var(--pico-color-amber-750);
-}
 
-nav ul {
-  color: white;
-}
-
-nav ul a {
-  color: var(--pico-color-amber-150);
-}
-
-nav img {
+img.profile-picture {
   height: 50px;
   width: auto;
   border-radius: 100%;
 }
 
-[role=button],
+/* [role=button],
 [type=button],
 [type=file]::file-selector-button,
 [type=reset],
@@ -29,4 +18,38 @@ nav img {
 button {
   background-color: var(--pico-color-green-500);
   border-color:  var(--pico-color-amber-50);
+} */
+
+@media only screen and (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --pico-background-color: var(--pico-color-sand-50);
+
+    .section-nav {
+      background-color: var(--pico-primary-background);
+    }
+
+    nav ul {
+      color: var(--pico-primary-inverse);
+    }
+
+    nav ul a {
+      color: var(--pico-primary-inverse);
+    }
+}
+
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+
+    .section-nav {
+      background-color: var(--pico-background-color);
+    }
+  
+    
+    nav ul {
+      color: var(--pico-primary-inverse);
+    }
+  
+    nav ul a {
+      color: var(--pico-primary-inverse);
+    }
 }
