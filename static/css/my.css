@@ -1,0 +1,26 @@
+body {
+  background-color: var(--pico-color-amber-50);
+  min-height: 100vh;
+}
+
+.section-nav {
+  background-color: var(--pico-color-amber-750);
+}
+
+nav ul {
+  color: white;
+}
+
+nav ul a {
+  color: var(--pico-color-amber-150);
+}
+
+[role=button],
+[type=button],
+[type=file]::file-selector-button,
+[type=reset],
+[type=submit],
+button {
+  background-color: var(--pico-color-green-500);
+  border-color:  var(--pico-color-amber-50);
+}
