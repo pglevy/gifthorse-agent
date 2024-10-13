@@ -20,7 +20,7 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user)
             next_page = request.args.get('next')
-            return redirect(next_page or url_for('profile.view_profile'))
+            return redirect(next_page or url_for('wishlist.view_wishlist'))
         flash('Invalid email or password')
     return render_template('login.html', form=form)
 
