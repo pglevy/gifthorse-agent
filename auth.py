@@ -32,7 +32,7 @@ def register():
         if existing_user:
             flash('Email already registered')
         else:
-            new_user = User(email=form.email.data, name=form.name.data)
+            new_user = User(email=form.email.data, name=form.name.data, profile_picture='default_profile.png')
             new_user.set_password(form.password.data)
             db.session.add(new_user)
             db.session.commit()

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
-from models import Wishlist, User
-from forms import WishlistItemForm, EditWishlistItemForm
+from models import Wishlist, User, Comment
+from forms import WishlistItemForm, EditWishlistItemForm, CommentForm
 from app import db
 
 wishlist = Blueprint('wishlist', __name__)
@@ -99,3 +99,22 @@ def mark_available(item_id):
         db.session.commit()
         flash('Item marked as available!', 'success')
     return redirect(url_for('wishlist.shopping_list'))
+
+@wishlist.route('/shopping_list/comments/<int:item_id>', methods=['GET', 'POST'])
+@login_required
+def item_comments(item_id):
+    item = Wishlist.query.get_or_404(item_id)
+    if item.user_id == current_user.id:
+        flash('You cannot view comments on your own items.', 'warning')
+        return redirect(url_for('wishlist.shopping_list'))
+    
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(content=form.content.data, user_id=current_user.id, wishlist_item_id=item.id)
+        db.session.add(comment)
+        db.session.commit()
+        flash('Your comment has been added.', 'success')
+        return redirect(url_for('wishlist.item_comments', item_id=item.id))
+
+    comments = Comment.query.filter_by(wishlist_item_id=item.id).order_by(Comment.created_at.desc()).all()
+    return render_template('item_comments.html', item=item, form=form, comments=comments)

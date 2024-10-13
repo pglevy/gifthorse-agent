@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Comments for {{ item.item_name }}</h2>
+<p><strong>Item Details:</strong> {{ item.notes }}</p>
+<p><strong>Price Range:</strong> {{ item.price_range.capitalize() }}</p>
+
+<h3>Add a Comment</h3>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.content.label }}
+        {{ form.content(rows=3) }}
+    </div>
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
+
+<h3>Comments</h3>
+{% if comments %}
+    {% for comment in comments %}
+    <article>
+        <p>{{ comment.content }}</p>
+        <p><small>By {{ comment.user.name }} on {{ comment.created_at.strftime('%Y-%m-%d %H:%M') }}</small></p>
+    </article>
+    {% endfor %}
+{% else %}
+    <p>No comments yet.</p>
+{% endif %}
+
+<a href="{{ url_for('wishlist.shopping_list') }}">Back to Shopping List</a>
+{% endblock %}

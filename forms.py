@@ -45,3 +45,7 @@ class EditWishlistItemForm(FlaskForm):
     public = BooleanField('Make this item public')
     notes = TextAreaField('Notes', validators=[Optional(), Length(max=500)])
     submit = SubmitField('Update Item')
+
+class CommentForm(FlaskForm):
+    content = TextAreaField('Comment', validators=[DataRequired(), Length(max=500)])
+    submit = SubmitField('Add Comment')
