@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<hgroup>
+  <h1>Saddle up for shopping season</h1>
+  <p>Make your wish list. Then shop for others.</p>
+</hgroup>
+
+<div class="grid">
+  <div></div>
+  <div>
+    <section>
+      <img src="{{ url_for('static', filename='img/gifthorse.jpg') }}" class="home-image">
+    </section>
+    <p><a href="{{ url_for('auth.login') }}" role="button" style="display:block;">Login</a></p>
+    <p style="text-align:center;">New user? <a href="{{ url_for('auth.register') }}">Register here</a></p>
+  </div>
+  <div></div>
+</div>
+
+{% endblock %}

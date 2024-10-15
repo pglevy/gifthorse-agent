@@ -20,12 +20,12 @@
     <section class="section-nav">
         <nav class="container">
             <ul>
-                <li><strong>GiftHorse</strong></li>
+                <li><strong><a href="{{ url_for('index') }}">GiftHorse</a></strong></li>
             </ul>
             <ul>
                 {% if current_user.is_authenticated %}
                     <!-- <li><a href="{{ url_for('auth.list_users') }}">User List</a></li> -->
-                    <li><a href="{{ url_for('wishlist.view_wishlist') }}">Wishlist</a></li>
+                    <li><a href="{{ url_for('wishlist.view_wishlist') }}">Wish List</a></li>
                     <li><a href="{{ url_for('wishlist.shopping_list') }}">Shopping List</a></li>
                 <li><a href="{{ url_for('profile.view_profile') }}"><img src="{{ url_for('static', filename='profile_pics/' + (current_user.profile_picture if current_user.profile_picture else 'default.png')) }}" alt="Profile Picture" class="profile-picture"></a></li>
                 {% else %}
@@ -40,11 +40,13 @@
     <main class="container">
         {% with messages = get_flashed_messages() %}
             {% if messages %}
-                <ul class="flashes">
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
+                <article>
+                    <ul class="flashes">
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </article>
             {% endif %}
         {% endwith %}
         

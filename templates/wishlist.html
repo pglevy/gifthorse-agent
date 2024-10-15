@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Your Wishlist</h2>
+<hgroup>
+  <h1>Wish List</h1>
+  <p>Add gifts you want to your list.</p>
+</hgroup>
 {% if items %}
 {% for item in items %}
 <article>
@@ -12,7 +15,7 @@
 </article>
 {% endfor %}
 {% else %}
-    <p>Your wishlist is empty.</p>
+    <p>Your wish list is empty.</p>
 {% endif %}
 <a href="{{ url_for('wishlist.add_wishlist_item') }}" role="button">Add New Item</a>
 {% endblock %}

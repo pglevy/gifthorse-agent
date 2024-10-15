@@ -10,6 +10,14 @@ img.profile-picture {
   border-radius: 100%;
 }
 
+img.home-image {
+  border-radius: var(--pico-border-radius);
+}
+
+ul.flashes {
+  margin-bottom: 0;
+}
+
 /* [role=button],
 [type=button],
 [type=file]::file-selector-button,
