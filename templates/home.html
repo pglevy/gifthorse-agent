@@ -13,8 +13,13 @@
     <section>
       <img src="{{ url_for('static', filename='img/gifthorse.jpg') }}" class="home-image">
     </section>
+    {% if current_user.is_authenticated %}
+    <p><a href="{{ url_for('wishlist.view_wishlist') }}" role="button" style="display:block;">Go To Wish List</a></p>
+    <p style="text-align:center;">All done wishing?<br><a href="{{ url_for('wishlist.shopping_list') }}">Go Shopping</a></p>
+    {% else %}
     <p><a href="{{ url_for('auth.login') }}" role="button" style="display:block;">Login</a></p>
     <p style="text-align:center;">New user? <a href="{{ url_for('auth.register') }}">Register here</a></p>
+    {% endif %}
   </div>
   <div></div>
 </div>
