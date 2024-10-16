@@ -1,58 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <title>User Profile App</title>
     <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"> -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.green.min.css"
-    >
+    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css"
-    >
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/my.css') }}">
-</head>
-<body>
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/my.css') }}"
+    />
+  </head>
+  <body>
     <section class="section-nav">
-        <nav class="container">
-            <ul>
-                <li><strong><a href="{{ url_for('index') }}">GiftHorse</a></strong></li>
-            </ul>
-            <ul>
-                {% if current_user.is_authenticated %}
-                    <!-- <li><a href="{{ url_for('auth.list_users') }}">User List</a></li> -->
-                    <li><a href="{{ url_for('wishlist.view_wishlist') }}">Wish List</a></li>
-                    <li><a href="{{ url_for('wishlist.shopping_list') }}">Shopping List</a></li>
-                <li><a href="{{ url_for('profile.view_profile') }}"><img src="{{ url_for('static', filename='profile_pics/' + (current_user.profile_picture if current_user.profile_picture else 'default.png')) }}" alt="Profile Picture" class="profile-picture"></a></li>
-                {% else %}
-                    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
-                    <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-                {% endif %}
-            </ul>
-        </nav>
+      <nav class="container">
+        <ul>
+          <li>
+            <strong><a href="{{ url_for('index') }}">GiftHorse</a></strong>
+          </li>
+        </ul>
+        <ul>
+          {% if current_user.is_authenticated %}
+          <li class="desktop-menu">
+            <a href="{{ url_for('wishlist.view_wishlist') }}">Wish List</a>
+          </li>
+          <li class="desktop-menu">
+            <a href="{{ url_for('wishlist.shopping_list') }}">Shopping List</a>
+          </li>
+          <li class="desktop-menu">
+            <a href="{{ url_for('profile.view_profile') }}"
+              ><img
+                src="{{ url_for('static', filename='profile_pics/' + (current_user.profile_picture if current_user.profile_picture else 'default.png')) }}"
+                alt="Profile Picture"
+                class="profile-picture"
+            /></a>
+          </li>
+          <li id="mobile-menu">
+            <details class="dropdown">
+              <summary role="button">Menu</summary>
+              <ul dir="rtl">
+                <li>
+                  <a href="{{ url_for('wishlist.view_wishlist') }}"
+                    >Wish List</a
+                  >
+                </li>
+                <li>
+                  <a href="{{ url_for('wishlist.shopping_list') }}"
+                    >Shopping List</a
+                  >
+                </li>
+                <li>
+                  <a href="{{ url_for('profile.view_profile') }}"
+                    ><img
+                      src="{{ url_for('static', filename='profile_pics/' + (current_user.profile_picture if current_user.profile_picture else 'default.png')) }}"
+                      alt="Profile Picture"
+                      class="profile-picture"
+                  /></a>
+                </li>
+              </ul>
+            </details>
+          </li>
+          {% else %}
+          <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+          <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+          {% endif %}
+        </ul>
+      </nav>
     </section>
-    
-    
+
     <main class="container">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <article>
-                    <ul class="flashes">
-                        {% for message in messages %}
-                            <li>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                </article>
-            {% endif %}
-        {% endwith %}
-        
-        {% block content %}{% endblock %}
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <article>
+        <ul class="flashes">
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      </article>
+      {% endif %} {% endwith %} {% block content %}{% endblock %}
     </main>
-    
+
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-</body>
+  </body>
 </html>

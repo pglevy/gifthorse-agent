@@ -3,6 +3,9 @@ body {
   min-height: 100vh;
 }
 
+nav details.dropdown {
+  margin: 0;
+}
 
 img.profile-picture {
   height: 50px;
@@ -43,21 +46,52 @@ button {
     nav ul a {
       color: var(--pico-primary-inverse);
     }
+
+    details ul {
+      background-color: var(--pico-secondary);
+    }
+
+    details ul li a:hover,
+    details ul li a:active,
+    details ul li a:focus,
+    details ul li a:focus-visible {
+      background-color: var(--pico-primary-background);
+    }
+  }
 }
 
 @media only screen and (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-
     .section-nav {
       background-color: var(--pico-background-color);
     }
-  
-    
+
     nav ul {
       color: var(--pico-primary-inverse);
     }
-  
+
     nav ul a {
       color: var(--pico-primary-inverse);
     }
+  }
+}
+
+@media screen and (max-width: 399px) {
+  .desktop-menu {
+    display: none;
+  }
+  
+  #mobile-menu {
+    display: inline-block;
+  }
+}
+
+@media screen and (min-width: 400px) {
+  .desktop-menu {
+    display: inline-block;
+  }
+  
+  #mobile-menu {
+    display: none;
+  }
 }
