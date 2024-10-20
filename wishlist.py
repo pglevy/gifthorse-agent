@@ -1,15 +1,16 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
-from models import Wishlist, User, Comment
+from models import Wishlist, Comment
 from forms import WishlistItemForm, EditWishlistItemForm, CommentForm
 from app import db
+import logging
 
 wishlist = Blueprint('wishlist', __name__)
 
 @wishlist.route('/wishlist')
 @login_required
 def view_wishlist():
-    items = current_user.wishlist_items.all()
+    items = Wishlist.query.filter_by(user_id=current_user.id).all()
     return render_template('wishlist.html', items=items)
 
 @wishlist.route('/wishlist/add', methods=['GET', 'POST'])
@@ -17,18 +18,28 @@ def view_wishlist():
 def add_wishlist_item():
     form = WishlistItemForm()
     if form.validate_on_submit():
-        new_item = Wishlist(
-            item_name=form.item_name.data,
-            item_url=form.item_url.data,
-            price_range=form.price_range.data,
-            public=form.public.data,
-            notes=form.notes.data,
-            user_id=current_user.id
-        )
-        db.session.add(new_item)
-        db.session.commit()
-        flash('Item added to your wishlist!', 'success')
-        return redirect(url_for('wishlist.view_wishlist'))
+        try:
+            new_item = Wishlist(
+                item_name=form.item_name.data,
+                item_url=form.item_url.data,
+                price_range=form.price_range.data,
+                public=form.public.data,
+                notes=form.notes.data,
+                user_id=current_user.id
+            )
+            db.session.add(new_item)
+            db.session.commit()
+            flash('Item added to your wishlist!', 'success')
+            return redirect(url_for('wishlist.view_wishlist'))
+        except Exception as e:
+            db.session.rollback()
+            logging.error(f"Error adding wishlist item: {str(e)}")
+            flash('An error occurred while adding the item. Please try again.', 'danger')
+    else:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"Error in {field}: {error}", 'danger')
+    
     return render_template('add_wishlist_item.html', form=form)
 
 @wishlist.route('/wishlist/remove/<int:item_id>', methods=['POST'])
