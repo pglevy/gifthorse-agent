@@ -10,10 +10,10 @@
     <p><strong>Notes:</strong> {{ item.notes }}</p>
     <div class="grid">
         <form method="GET" action="{{ url_for('wishlist.edit_wishlist_item', item_id=item.id) }}" style="display: inline-block;">
-            <input type="submit" value="Edit" class="secondary">
+            <input type="submit" value="Edit" class="secondary" style="margin-bottom:0;">
         </form>
         <form method="POST" action="{{ url_for('wishlist.remove_wishlist_item', item_id=item.id) }}" style="display: inline-block;">
-            <input type="submit" value="Remove" onclick="return confirm('Are you sure you want to remove this item?');" class="outline secondary">
+            <input type="submit" value="Remove" onclick="return confirm('Are you sure you want to remove this item?');" class="outline secondary" style="margin-bottom:0;">
         </form>
     </div>
         <!-- <a href="{{ url_for('wishlist.edit_wishlist_item', item_id=item.id) }}">Edit</a> -->
