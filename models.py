@@ -47,7 +47,7 @@ class Wishlist(db.Model):
     public = db.Column(db.Boolean, default=False, nullable=False)
     notes = db.Column(db.Text, nullable=True)
     bought = db.Column(db.Boolean, default=False, nullable=False)
-    comments = db.relationship('Comment', backref='wishlist_item', lazy='dynamic')
+    comments = db.relationship('Comment', backref='wishlist_item', lazy='dynamic', cascade='all, delete-orphan')
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)

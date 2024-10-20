@@ -27,6 +27,10 @@ args = "DB Upgrade"
 task = "workflow.run"
 args = "DB Migrate"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Test Cascade Delete"
+
 [[workflows.workflow]]
 name = "Start Flask App"
 author = "agent"
@@ -72,6 +76,17 @@ agentRequireRestartOnSave = false
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "flask db migrate -m 'Add Comment model'"
+
+[[workflows.workflow]]
+name = "Test Cascade Delete"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python test_cascade_delete.py"
 
 [deployment]
 run = ["sh", "-c", "python main.py"]
