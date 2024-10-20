@@ -17,12 +17,12 @@
         {{ form.price_range() }}
     </div>
     <div>
-        {{ form.public.label }}
-        {{ form.public() }}
-    </div>
-    <div>
         {{ form.notes.label }}
         {{ form.notes() }}
+    </div>
+    <div style="margin-top:2rem; margin-bottom:2rem;">
+        {{ form.public() }}
+        {{ form.public.label }}
     </div>
     <div>
         {{ form.submit() }}

@@ -8,7 +8,9 @@
     <h2><a href="{{ item.item_url }}" target="_blank">{{ item.item_name }}</a></h2>
     <p><strong>Visible:</strong> {% if item.public %}Yes{% else %}No{% endif %}</p>
     <p><strong>Price:</strong> {{ item.price_range.capitalize() }}</p>
+    {% if item.notes %}
     <p><strong>Notes:</strong> {{ item.notes }}</p>
+    {% endif %}
     <div class="grid">
         <form method="GET" action="{{ url_for('wishlist.edit_wishlist_item', item_id=item.id) }}" style="display: inline-block;">
             <input type="submit" value="Edit" class="secondary" style="margin-bottom:0;">
