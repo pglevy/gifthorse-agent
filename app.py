@@ -21,7 +21,7 @@ migrate = Migrate()
 def create_db_engine_with_retry(db_url, max_retries=3, retry_interval=5):
     for attempt in range(max_retries):
         try:
-            engine = create_engine(db_url, poolclass=QueuePool, pool_size=10, max_overflow=20)
+            engine = create_engine(db_url, poolclass=QueuePool, pool_size=20, max_overflow=10, pool_pre_ping=True)
             # Test the connection
             with engine.connect() as conn:
                 conn.execute(text("SELECT 1"))
