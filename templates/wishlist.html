@@ -6,6 +6,7 @@
 {% for item in items %}
 <article>
     <h2><a href="{{ item.item_url }}" target="_blank">{{ item.item_name }}</a></h2>
+    <p><strong>Visible:</strong> {% if item.public %}Yes{% else %}No{% endif %}</p>
     <p><strong>Price:</strong> {{ item.price_range.capitalize() }}</p>
     <p><strong>Notes:</strong> {{ item.notes }}</p>
     <div class="grid">
