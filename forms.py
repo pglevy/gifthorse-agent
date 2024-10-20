@@ -1,7 +1,13 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, FileField, SelectField, BooleanField, TextAreaField
-from wtforms.validators import DataRequired, Email, EqualTo, Length, URL, Optional
+from wtforms.validators import DataRequired, Email, EqualTo, Length, URL, Optional, ValidationError
 from flask_wtf.file import FileAllowed
+import re
+
+def custom_url_validator(form, field):
+    url_pattern = re.compile(r'^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-zA-Z0-9]+([\-\.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,5}(:[0-9]{1,5})?(\/.*)?$')
+    if not url_pattern.match(field.data):
+        raise ValidationError('Invalid URL. Please enter a valid URL (e.g., https://www.example.com).')
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -32,7 +38,7 @@ class ResetPasswordForm(FlaskForm):
 
 class WishlistItemForm(FlaskForm):
     item_name = StringField('Item Name', validators=[DataRequired()])
-    item_url = StringField('Item URL', validators=[URL(), DataRequired()])
+    item_url = StringField('Item URL', validators=[DataRequired(), custom_url_validator])
     price_range = SelectField('Price Range', choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')], validators=[DataRequired()])
     public = BooleanField('Let others see on Shopping List')
     notes = TextAreaField('Notes', validators=[Optional(), Length(max=500)])
@@ -40,7 +46,7 @@ class WishlistItemForm(FlaskForm):
 
 class EditWishlistItemForm(FlaskForm):
     item_name = StringField('Item Name', validators=[DataRequired()])
-    item_url = StringField('Item URL', validators=[URL(), DataRequired()])
+    item_url = StringField('Item URL', validators=[DataRequired(), custom_url_validator])
     price_range = SelectField('Price Range', choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')], validators=[DataRequired()])
     public = BooleanField('Let others see on Shopping List')
     notes = TextAreaField('Notes', validators=[Optional(), Length(max=500)])
