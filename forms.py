@@ -38,7 +38,7 @@ class ResetPasswordForm(FlaskForm):
 
 class WishlistItemForm(FlaskForm):
     item_name = StringField('Item Name', validators=[DataRequired()])
-    item_url = StringField('Item URL', validators=[DataRequired(), custom_url_validator])
+    item_url = StringField('Item URL', validators=[Optional(), custom_url_validator])
     price_range = SelectField('Price Range', choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')], validators=[DataRequired()])
     public = BooleanField('Let others see on Shopping List')
     notes = TextAreaField('Notes', validators=[Optional(), Length(max=500)])
@@ -46,7 +46,7 @@ class WishlistItemForm(FlaskForm):
 
 class EditWishlistItemForm(FlaskForm):
     item_name = StringField('Item Name', validators=[DataRequired()])
-    item_url = StringField('Item URL', validators=[DataRequired(), custom_url_validator])
+    item_url = StringField('Item URL', validators=[Optional(), custom_url_validator])
     price_range = SelectField('Price Range', choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')], validators=[DataRequired()])
     public = BooleanField('Let others see on Shopping List')
     notes = TextAreaField('Notes', validators=[Optional(), Length(max=500)])
