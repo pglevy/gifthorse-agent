@@ -18,10 +18,10 @@ login_manager = LoginManager()
 mail = Mail()
 migrate = Migrate()
 
-def create_db_engine_with_retry(db_url, max_retries=3, retry_interval=5):
+def create_db_engine_with_retry(db_url, max_retries=5, retry_interval=3):
     for attempt in range(max_retries):
         try:
-            engine = create_engine(db_url, poolclass=QueuePool, pool_size=20, max_overflow=10, pool_pre_ping=True)
+            engine = create_engine(db_url)
             # Test the connection
             with engine.connect() as conn:
                 conn.execute(text("SELECT 1"))
@@ -37,6 +37,10 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = os.urandom(24)
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+    app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+        "pool_recycle": 300,
+        "pool_pre_ping": True,
+    }
     
     # Mail configuration
     app.config['MAIL_SERVER'] = 'smtp.gmail.com'
