@@ -1,7 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Your Wish List</h2>
+<hgroup>
+  <h1>Wish List</h1>
+  <p>Add gifts you want to your list.</p>
+</hgroup>
+<article>
+    <blockquote style="border-color:#D93526;">
+        <p>
+            Wish list due date: November 27
+        </p>
+        <progress id="prog" value="1" max="100" />
+    </blockquote>
+</article>
+
 {% if items %}
 {% for item in items %}
 <article>
