@@ -8,7 +8,7 @@
 {% if items %}
 {% for item in items %}
 <article>
-    <h2>{% if item.url %}<a href="{{ item.item_url }}" target="_blank">{% endif %}{{ item.item_name }}{% if item.url %}</a>{% endif %}</h2>
+    <h2>{% if item.item_url %}<a href="{{ item.item_url }}" target="_blank">{% endif %}{{ item.item_name }}{% if item.item_url %}</a>{% endif %}</h2>
     <p><strong>For:</strong> {{ item.user.name }}</p>
     <p><strong>Price:</strong> {{ item.price_range.capitalize() }}</p>
     <p><strong>Notes:</strong> {{ item.notes }}</p>
