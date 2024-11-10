@@ -17,7 +17,7 @@
 {% if items %}
 {% for item in items %}
 <article>
-    <h2><a href="{{ item.item_url }}" target="_blank">{{ item.item_name }}</a></h2>
+    <h2>{% if item.item_url %}<a href="{{ item.item_url }}" target="_blank">{% endif %}{{ item.item_name }}{% if item.item_url %}</a>{% endif %}</h2>
     <p><strong>Visible:</strong> {% if item.public %}Yes{% else %}No{% endif %}</p>
     <p><strong>Price:</strong> {{ item.price_range.capitalize() }}</p>
     {% if item.notes %}
