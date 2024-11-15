@@ -85,7 +85,8 @@ def edit_wishlist_item(item_id):
 @login_required
 def shopping_list():
     public_items = Wishlist.query.filter_by(public=True).filter(Wishlist.user_id != current_user.id).all()
-    return render_template('shopping_list.html', items=public_items)
+    sorted_items = sorted(public_items, key=lambda item: item.bought)
+    return render_template('shopping_list.html', items=sorted_items)
 
 @wishlist.route('/shopping_list/mark_bought/<int:item_id>', methods=['POST'])
 @login_required

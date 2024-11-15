@@ -12,14 +12,14 @@
     <p><strong>For:</strong> {{ item.user.name }}</p>
     <p><strong>Price:</strong> {{ item.price_range.capitalize() }}</p>
     <p><strong>Notes:</strong> {{ item.notes }}</p>
-    <p><strong>Status:</strong> {{ "Bought" if item.bought else "Available" }}</p>
+    <p><strong>Status:</strong> {{ "Claimed" if item.bought else "Available" }}</p>
     {% if item.bought %}
     <form action="{{ url_for('wishlist.mark_available', item_id=item.id) }}" method="POST">
-        <input type="submit" value="Mark as Available" onclick="return confirm('Are you sure you want to mark this item as available?');">
+        <input type="submit" value="Unclaim" class="outline secondary" onclick="return confirm('Are you sure you want to unclaim this item?');">
     </form>
     {% else %}
     <form action="{{ url_for('wishlist.mark_bought', item_id=item.id) }}" method="POST">
-        <input type="submit" value="Mark as Bought" onclick="return confirm('Are you sure you want to mark this item as bought?');">
+        <input type="submit" value="Claim" onclick="return confirm('Are you sure you want to claim this item?');">
     </form>
     {% endif %}
     <a href="{{ url_for('wishlist.item_comments', item_id=item.id) }}">Comments</a>
