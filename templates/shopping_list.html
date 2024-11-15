@@ -22,7 +22,7 @@
         <input type="submit" value="Claim" onclick="return confirm('Are you sure you want to claim this item?');">
     </form>
     {% endif %}
-    <a href="{{ url_for('wishlist.item_comments', item_id=item.id) }}">Comments</a>
+    <a href="{{ url_for('wishlist.item_comments', item_id=item.id) }}">Comments ({{ item.comments.count() }})</a>
 </article>
 {% endfor %}
 {% else %}
