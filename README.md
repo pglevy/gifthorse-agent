@@ -16,3 +16,12 @@ Once their Agent became available and I tried out some basic examples, the path 
 The recommendation when using Agent was to let go of preferences like the tech stack and focus on the functionality. So I started with asking for a simple CRUD app for users to manage their profile and then started adding features with prompts like, “let people create a wish list of items” and “create a shopping list where people can see the items other people want, but not their own.” The Agent selected Python with Flask and Postgres (with some basic hand-rolled CSS), and got to work. Occasionally, there were some glitches, but I would point them out and it would iron out the bugs along the way. Once the core functionality was working, I hopped in to add a minimal CSS framework (Pico) to level-up the layout and tweak some interactions.
 
 So far it’s working beautifully, with family members adding items to their wish lists and others claiming them off the shopping list. Of course, there’s user feedback and things to fix or improve as with any software product. After working in enterprise UX for years, where we are often disconnected from our users, it’s really fun to see someone use something you’ve built, give direct feedback, and then make a change and re-deploy it within minutes. While there will always be a need for a professional developers, this seems like the future of custom software: exactly what you need when you need it.
+
+## Screenshots
+
+The home, item edit, comment, and shopping list screens:
+
+<img src="https://github.com/user-attachments/assets/570f97f3-a407-4cfa-a1dc-7a8d6f60b963" width="400" alt="home screen">
+<img src="https://github.com/user-attachments/assets/b69ae758-3dda-4292-b162-5fe347a34922" width="400" alt="edit item screen">
+<img src="https://github.com/user-attachments/assets/87013970-d7f0-48a9-98fb-8f5728d807d3" width="400" alt="comment screen">
+<img src="https://github.com/user-attachments/assets/8f65ce27-4661-4c5c-9914-4c3f0b497e9d" width="400" alt="shopping list screen">
